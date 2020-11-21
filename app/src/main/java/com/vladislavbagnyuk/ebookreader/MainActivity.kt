@@ -6,6 +6,9 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TableLayout
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +22,10 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+
+        recycler_view.setHasFixedSize(true)
+        recycler_view.layoutManager = GridLayoutManager(this, 2);
+        recycler_view.adapter = BooksAdapter(getSampleBooks())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -36,4 +43,25 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+}
+
+fun getSampleBooks(): List<Book> {
+    return listOf(
+            Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
+            Book("The Lord of the Rings: The Fellowship of the Ring", "J. R. R. Tolkien", R.drawable.coverlotr, 1200, 200, "Lorem ipsum dolor sit amet"),
+            Book("Harry Potter and the Half-Blood Prince", "J. K. Rowling", R.drawable.cover_harry_potter, 500, 320, "Lorem ipsum dolor sit amet"),
+            Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
+            Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
+            Book("The Lord of the Rings: The Fellowship of the Ring", "J. R. R. Tolkien", R.drawable.coverlotr, 1200, 200, "Lorem ipsum dolor sit amet"),
+            Book("Harry Potter and the Half-Blood Prince", "J. K. Rowling", R.drawable.cover_harry_potter, 500, 320, "Lorem ipsum dolor sit amet"),
+            Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
+            Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
+            Book("The Lord of the Rings: The Fellowship of the Ring", "J. R. R. Tolkien", R.drawable.coverlotr, 1200, 200, "Lorem ipsum dolor sit amet"),
+            Book("Harry Potter and the Half-Blood Prince", "J. K. Rowling", R.drawable.cover_harry_potter, 500, 320, "Lorem ipsum dolor sit amet"),
+            Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
+            Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
+            Book("The Lord of the Rings: The Fellowship of the Ring", "J. R. R. Tolkien", R.drawable.coverlotr, 1200, 200, "Lorem ipsum dolor sit amet"),
+            Book("Harry Potter and the Half-Blood Prince", "J. K. Rowling", R.drawable.cover_harry_potter, 500, 320, "Lorem ipsum dolor sit amet"),
+            Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
+    )
 }
