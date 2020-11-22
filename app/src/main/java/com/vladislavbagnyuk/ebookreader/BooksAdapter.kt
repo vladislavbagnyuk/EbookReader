@@ -18,7 +18,7 @@ class BooksAdapter(private val books: List<Book>) :
         return BookViewHolder(view)
     }
 
-    // Specifies the contents for the shown habit
+    // Specifies the contents for the shown book card
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BookViewHolder, index: Int) {
         val book = books[index]
