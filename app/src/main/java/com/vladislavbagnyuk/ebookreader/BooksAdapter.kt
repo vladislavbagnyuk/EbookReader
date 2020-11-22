@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.book_card.view.*
+import kotlinx.android.synthetic.main.book_card_library.view.*
 
 class BooksAdapter(private val books: List<Book>) :
         RecyclerView.Adapter<BooksAdapter.BookViewHolder>() {
@@ -14,7 +14,7 @@ class BooksAdapter(private val books: List<Book>) :
 
     // Create a new ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.book_card, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.book_card_library, parent, false)
         return BookViewHolder(view)
     }
 

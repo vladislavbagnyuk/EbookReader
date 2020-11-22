@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        recycler_view.setHasFixedSize(true)
-        recycler_view.layoutManager = GridLayoutManager(this, 2);
-        recycler_view.adapter = BooksAdapter(getSampleBooks())
+        rv_library.setHasFixedSize(true)
+        rv_library.layoutManager = GridLayoutManager(this, 2);
+        rv_library.adapter = BooksAdapter(getSampleBooks())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

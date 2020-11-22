@@ -11,4 +11,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="add_book">Add book</string>
     <string name="book_cover">Book cover</string>
+    <string name="continue_reading">Continue Reading</string>
+    <string name="library">Library</string>
 </resources>
