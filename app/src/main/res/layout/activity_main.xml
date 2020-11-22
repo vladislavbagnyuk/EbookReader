@@ -9,14 +9,15 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.EbookReader.AppBarOverlay">
+        android:theme="@style/Theme.EbookReader.AppBarOverlay"
+        android:stateListAnimator="@animator/appbar_always_elevated">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
-            app:popupTheme="@style/Theme.EbookReader.PopupOverlay" >
+            app:popupTheme="@style/Theme.EbookReader.PopupOverlay">
 
             <TextView
                 android:id="@+id/toolbar_title"
@@ -55,14 +56,18 @@
                     android:fontFamily="@font/source_serif_pro_semi_bold"
                     android:text="@string/continue_reading"
                     android:textColor="@color/black"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    android:layout_marginTop="32dp"
+                    android:paddingHorizontal="20dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_recent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:scrollbars="horizontal"
-                    android:orientation="horizontal"/>
+                    android:paddingHorizontal="10dp"
+                    android:clipToPadding = "false"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -70,12 +75,17 @@
                     android:fontFamily="@font/source_serif_pro_semi_bold"
                     android:text="@string/library"
                     android:textColor="@color/black"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    android:layout_marginTop="25dp"
+                    android:paddingHorizontal="20dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_library"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="RtlSymmetry"
+                    android:paddingHorizontal="10dp"
+                    />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
