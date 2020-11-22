@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.book_card_library.view.*
+import kotlinx.android.synthetic.main.book_card_library.view.iv_cover
+import kotlinx.android.synthetic.main.book_card_library.view.tv_percentage
+import kotlinx.android.synthetic.main.book_card_recent.view.*
 
 class RecentAdapter(private val books: List<Book>) :
         RecyclerView.Adapter<RecentAdapter.BookViewHolder>() {
@@ -22,9 +25,11 @@ class RecentAdapter(private val books: List<Book>) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BookViewHolder, index: Int) {
         val book = books[index]
+        val percentage = book.percentage()
         with(holder.card) {
             iv_cover.setImageResource(book.cover)
-            tv_percentage.text = "${book.percentage()}%"
+            tv_percentage.text = "${percentage}%"
+            progress_bar.progress = percentage
         }
 
     }

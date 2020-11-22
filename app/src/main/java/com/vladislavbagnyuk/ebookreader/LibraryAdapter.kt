@@ -1,6 +1,7 @@
 package com.vladislavbagnyuk.ebookreader
 
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,11 @@ class LibraryAdapter(private val books: List<Book>) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BookViewHolder, index: Int) {
         val book = books[index]
+
+        val options = BitmapFactory.Options().apply {
+            inJustDecodeBounds = true
+        }
+
         with(holder.card) {
             iv_cover.setImageResource(book.cover)
             tv_percentage.text = "${book.percentage()}%"

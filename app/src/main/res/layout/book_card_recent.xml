@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent"
     android:layout_width="155sp"
     android:layout_height="wrap_content"
@@ -39,17 +40,29 @@
                 android:src="@drawable/cover1984" />
         </androidx.cardview.widget.CardView>
 
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:progress="56"
+            android:progressDrawable="@drawable/progressbar_rounded_corner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_cover" />
+
         <TextView
             android:id="@+id/tv_percentage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
             android:fontFamily="@font/source_serif_pro_semi_bold"
             android:text="56%"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/cv_cover" />
+            app:layout_constraintTop_toBottomOf="@id/progress_bar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
