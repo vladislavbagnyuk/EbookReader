@@ -22,6 +22,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_cover"
             style="@style/BookCardView"
+            android:onClick="openBook"
             tools:ignore="MissingConstraints">
 
             <ImageView

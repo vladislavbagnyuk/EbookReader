@@ -6,28 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.EbookReader.AppBarOverlay"
-        android:stateListAnimator="@animator/appbar_always_elevated">
+    <com.google.android.material.appbar.AppBarLayout style="@style/AppBar">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/Theme.EbookReader.PopupOverlay">
+            style="@style/Toolbar">
 
             <TextView
                 android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/source_serif_pro_semi_bold"
+                style="@style/ToolbarText"
                 android:text="@string/ebook_reader"
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-        </androidx.appcompat.widget.Toolbar>
+/>
+        </com.google.android.material.appbar.MaterialToolbar>
 
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -52,39 +42,38 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
                     android:fontFamily="@font/source_serif_pro_semi_bold"
+                    android:paddingHorizontal="20dp"
                     android:text="@string/continue_reading"
                     android:textColor="@color/black"
-                    android:textSize="30sp"
-                    android:layout_marginTop="32dp"
-                    android:paddingHorizontal="20dp"/>
+                    android:textSize="30sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_recent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clipToPadding="false"
                     android:orientation="horizontal"
-                    android:scrollbars="horizontal"
                     android:paddingHorizontal="10dp"
-                    android:clipToPadding = "false"/>
+                    android:scrollbars="horizontal" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
                     android:fontFamily="@font/source_serif_pro_semi_bold"
+                    android:paddingHorizontal="20dp"
                     android:text="@string/library"
                     android:textColor="@color/black"
-                    android:textSize="30sp"
-                    android:layout_marginTop="25dp"
-                    android:paddingHorizontal="20dp"/>
+                    android:textSize="30sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_library"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:ignore="RtlSymmetry"
                     android:paddingHorizontal="10dp"
-                    />
+                    tools:ignore="RtlSymmetry" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>

@@ -1,10 +1,12 @@
 package com.vladislavbagnyuk.ebookreader
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,6 +30,11 @@ class MainActivity : AppCompatActivity() {
         rv_library.setHasFixedSize(true)
         rv_library.layoutManager = GridLayoutManager(this, 2)
         rv_library.adapter = LibraryAdapter(getSampleBooks())
+    }
+
+    fun openBook(view: View) {
+        val intent = Intent(this, BookActivity::class.java)
+        startActivity(intent)
     }
 }
 

@@ -17,10 +17,11 @@
         android:paddingHorizontal="10dp"
         android:paddingTop="16dp"
         android:paddingBottom="13dp">
-        
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_cover"
             style="@style/BookCardView"
+            android:onClick="openBook"
             tools:ignore="MissingConstraints">
 
             <ImageView
