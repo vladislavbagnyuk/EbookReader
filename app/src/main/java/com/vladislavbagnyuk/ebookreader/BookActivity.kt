@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.android.synthetic.main.activity_book.*
 
 class BookActivity : AppCompatActivity() {

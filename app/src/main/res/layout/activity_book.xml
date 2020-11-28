@@ -14,10 +14,10 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:visibility="gone"
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             android:paddingHorizontal="20dp"
+            android:visibility="gone"
             app:contentInsetStart="0dp">
 
             <RelativeLayout
@@ -29,7 +29,7 @@
                     android:layout_alignParentStart="true"
                     android:contentDescription="@string/back"
                     android:onClick="back"
-                    android:src="@drawable/ic_back" />
+                    android:src="@drawable/ic_arrow_left" />
 
                 <TextView
                     android:id="@+id/toolbar_title"
@@ -80,7 +80,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:animateLayoutChanges="true"
-        >
+        android:paddingVertical="25dp"
+        app:contentInsetStart="0dp">
 
         <LinearLayout
             android:id="@+id/bottomAppBarContent"
@@ -88,13 +89,61 @@
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:progress="33" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="25dp"
+                android:paddingHorizontal="52dp">
+
+                <ImageButton
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/previous_page"
+                    android:src="@drawable/ic_arrow_left" />
+
+                <TextView
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:text="125/375"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/next_page"
+                    android:src="@drawable/ic_arrow_right" />
+
+            </RelativeLayout>
 
             <TextView
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="33%" />
+                android:text="33%"
+                android:textSize="18sp" />
+
         </LinearLayout>
     </com.google.android.material.bottomappbar.BottomAppBar>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
