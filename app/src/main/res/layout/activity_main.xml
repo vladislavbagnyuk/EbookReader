@@ -15,8 +15,7 @@
             <TextView
                 android:id="@+id/toolbar_title"
                 style="@style/ToolbarText"
-                android:text="@string/ebook_reader"
-/>
+                android:text="@string/ebook_reader" />
         </com.google.android.material.appbar.MaterialToolbar>
 
 
