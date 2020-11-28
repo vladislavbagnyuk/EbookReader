@@ -16,31 +16,33 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
+            android:paddingHorizontal="20dp"
             android:visibility="gone"
-            >
+            app:contentInsetStart="0dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@+id/toolbar_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/back"
-                    android:src="@drawable/abc_vector_test"
-                    android:tint="#000000"
+                    style="@style/ToolbarButton"
                     android:layout_alignParentStart="true"
-                    android:background="?attr/actionBarItemBackground"
+                    android:contentDescription="@string/back"
                     android:onClick="back"
-                    />
+                    android:src="@drawable/ic_back" />
 
                 <TextView
                     android:id="@+id/toolbar_title"
                     style="@style/ToolbarText"
+                    android:layout_centerInParent="true"
                     android:gravity="center_horizontal"
-                    android:text="1984"
-                    android:layout_centerInParent="true"/>
+                    android:text="1984" />
+
+                <ImageButton
+                    style="@style/ToolbarButton"
+                    android:layout_alignParentEnd="true"
+                    android:contentDescription="@string/settings"
+                    android:src="@drawable/ic_aa" />
             </RelativeLayout>
 
         </com.google.android.material.appbar.MaterialToolbar>
@@ -50,8 +52,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="25dp"
-        android:paddingHorizontal="17dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="25dp">
 
         <TextView
             style="@style/TextSemiBold"
