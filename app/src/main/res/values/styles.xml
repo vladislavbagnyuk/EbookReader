@@ -29,7 +29,8 @@
     <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="popupTheme">@style/Theme.EbookReader.PopupOverlay</item>
+        <item name="android:animateLayoutChanges">true</item>
+        <item name="theme">@style/Theme.AppCompat.Light.NoActionBar</item>
     </style>
 
     <style name="TextSemiBold" parent="Widget.AppCompat.TextView">
