@@ -39,13 +39,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/TextSemiBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:fontFamily="@font/source_serif_pro_semi_bold"
                     android:paddingHorizontal="20dp"
                     android:text="@string/continue_reading"
-                    android:textColor="@color/black"
                     android:textSize="30sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -58,13 +57,12 @@
                     android:scrollbars="horizontal" />
 
                 <TextView
+                    style="@style/TextSemiBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:fontFamily="@font/source_serif_pro_semi_bold"
                     android:paddingHorizontal="20dp"
                     android:text="@string/library"
-                    android:textColor="@color/black"
                     android:textSize="30sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -85,7 +83,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:contentDescription="@string/add_book"
-        app:backgroundTint="@color/blue"
         app:rippleColor="#FFFFFF"
         app:srcCompat="@android:drawable/ic_input_add"
         app:tint="@color/white" />
