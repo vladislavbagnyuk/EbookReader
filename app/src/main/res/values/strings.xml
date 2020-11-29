@@ -14,7 +14,7 @@
     <string name="continue_reading">Continue Reading</string>
     <string name="library">Library</string>
     <string name="ebook_reader">Ebook Reader</string>
-    <string name="lorem_ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel dui mauris. Etiam dapibus rutrum neque quis aliquet. Nulla vestibulum, ligula non volutpat iaculis, est nisi auctor quam, sed consectetur quam massa at felis. Nulla facilisi. Praesent at nibh vel ante tincidunt commodo. Proin eu lorem placerat, ornare dolor vel, hendrerit orci. Vivamus a leo lacinia, tristique mauris vitae, iaculis velit. Vestibulum egestas sem nisl, eget auctor turpis eleifend a. Suspendisse potenti. Morbi sem nisl, auctor ut erat sed, maximus molestie ipsum. Nullam non arcu at libero blandit bibendum et nec sem. fermentum</string>
+    <string name="lorem_ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel dui mauris. Etiam dapibus rutrum neque quis aliquet. Nulla vestibulum, ligula non volutpat iaculis, est nisi auctor quam, sed consectetur quam massa at felis. Nulla facilisi. Praesent at nibh vel ante tincidunt commodo. Proin eu lorem placerat, ornare dolor vel, hendrerit orci. Vivamus a leo lacinia, tristique mauris vitae, iaculis velit. Vestibulum egestas sem nisl, eget auctor turpis eleifend a. Suspendisse potenti. Morbi sem nisl, auctor ut erat sed, maximus molestie ipsum.</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
