@@ -4,14 +4,15 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.mertakdut.BookSection
+import com.github.mertakdut.Reader
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.log
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,7 +51,23 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == CHOOSE_EBOOK_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             Log.d(TAG, "An ebook was chosen by the user")
-            Log.d(TAG, data.data.toString())
+
+            val uriPathHelper = URIPathHelper()
+            if (data.data != null) {
+                val ebookPath = uriPathHelper.getPath(this, data.data!!)
+                Log.d("dataoutput", ebookPath.toString())
+
+
+                val reader = Reader()
+                reader.setMaxContentPerSection(1000) // Max string length for the current page.
+                reader.setIsIncludingTextContent(true) // Optional, to return the tags-excluded version.
+                reader.setFullContent(ebookPath) // Must call before readSection.
+                val bookSection: BookSection = reader.readSection(1)
+                val sectionContent = bookSection.sectionContent // Returns content as html.
+                val sectionTextContent = bookSection.sectionTextContent // Excludes html tags.
+                Log.d(TAG, sectionContent)
+            }
+
         }
     }
 }
