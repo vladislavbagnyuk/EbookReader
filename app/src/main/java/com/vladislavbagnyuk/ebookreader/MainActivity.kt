@@ -10,8 +10,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.mertakdut.BookSection
-import com.github.mertakdut.Reader
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
