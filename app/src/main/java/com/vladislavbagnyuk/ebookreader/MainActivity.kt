@@ -1,7 +1,9 @@
 package com.vladislavbagnyuk.ebookreader
 
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mertakdut.BookSection
 import com.github.mertakdut.Reader
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.math.log
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,28 +48,26 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(chooser, CHOOSE_EBOOK_REQUEST)
     }
 
+    private fun getFileFromUri(contentResolver: ContentResolver, uri: Uri, directory: File): File {
+        val file = File.createTempFile("suffix", ".prefix", directory)
+        file.outputStream().use {
+            contentResolver.openInputStream(uri)?.copyTo(it)
+        }
+
+        return file
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == CHOOSE_EBOOK_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             Log.d(TAG, "An ebook was chosen by the user")
 
-            val uriPathHelper = URIPathHelper()
-            if (data.data != null) {
-                val ebookPath = uriPathHelper.getPath(this, data.data!!)
-                Log.d("dataoutput", ebookPath.toString())
+            val ebookPath = getFileFromUri(contentResolver, data.data!!, cacheDir).path
 
-
-                val reader = Reader()
-                reader.setMaxContentPerSection(1000) // Max string length for the current page.
-                reader.setIsIncludingTextContent(true) // Optional, to return the tags-excluded version.
-                reader.setFullContent(ebookPath) // Must call before readSection.
-                val bookSection: BookSection = reader.readSection(1)
-                val sectionContent = bookSection.sectionContent // Returns content as html.
-                val sectionTextContent = bookSection.sectionTextContent // Excludes html tags.
-                Log.d(TAG, sectionContent)
-            }
-
+            val intent = Intent(this, BookActivity::class.java)
+            intent.putExtra("ebookPath", ebookPath)
+            startActivity(intent)
         }
     }
 }
