@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.github.mertakdut.BookSection
+import com.github.mertakdut.Reader
 import kotlinx.android.synthetic.main.activity_book.*
 
 class BookActivity : AppCompatActivity() {
@@ -26,6 +28,20 @@ class BookActivity : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
             font_spinner.adapter = adapter
+        }
+
+        val ebookPath = intent.getStringExtra("ebookPath")
+        if (ebookPath !== null) {
+            val reader = Reader()
+            reader.setMaxContentPerSection(800) // Max string length for the current page.
+            reader.setIsIncludingTextContent(true) // Optional, to return the tags-excluded version.
+            reader.setFullContent(ebookPath) // Must call before readSection.
+            val bookSection: BookSection = reader.readSection(1)
+            val sectionContent = bookSection.sectionContent // Returns content as html.
+            val sectionTextContent = bookSection.sectionTextContent
+
+            // set html to webview
+            contentPanel.text = sectionTextContent
         }
 
     }
