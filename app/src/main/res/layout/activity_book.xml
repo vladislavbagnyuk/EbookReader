@@ -84,14 +84,6 @@
         android:paddingTop="25dp">
 
         <TextView
-            style="@style/TextSemiBold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="18sp"
-            android:text="Lorem ipsum"
-            android:textSize="42sp" />
-
-        <TextView
             android:id="@+id/contentPanel"
             style="@style/Text"
             android:layout_width="match_parent"
