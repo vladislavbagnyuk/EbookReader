@@ -138,6 +138,7 @@
                     android:src="@drawable/ic_arrow_left" />
 
                 <TextView
+                    android:id="@+id/pagesCountLabel"
                     style="@style/Text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -159,6 +160,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/percentageLabel"
                 style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
