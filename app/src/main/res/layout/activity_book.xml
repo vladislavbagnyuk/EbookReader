@@ -37,11 +37,11 @@
                     android:gravity="center_horizontal"
                     android:text="@string/book_title" />
 
-<!--                <ImageButton-->
-<!--                    style="@style/ToolbarButton"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:contentDescription="@string/settings"-->
-<!--                    android:src="@drawable/ic_aa" />-->
+                <!--                <ImageButton-->
+                <!--                    style="@style/ToolbarButton"-->
+                <!--                    android:layout_alignParentEnd="true"-->
+                <!--                    android:contentDescription="@string/settings"-->
+                <!--                    android:src="@drawable/ic_aa" />-->
             </RelativeLayout>
 
         </com.google.android.material.appbar.MaterialToolbar>
@@ -80,10 +80,10 @@
         android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onClick="showControls"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
         android:paddingTop="25dp">
+
         <TextView
             android:id="@+id/contentPanel"
             style="@style/Text"

@@ -2,7 +2,7 @@ package com.vladislavbagnyuk.ebookreader
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.preference.PreferenceManager
+import android.view.MotionEvent
 import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
@@ -35,29 +35,6 @@ class BookActivity : AppCompatActivity() {
 
         // room Db
         mBookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
-
-        // Swipe listener
-        contentLayout.setOnTouchListener(object : OnSwipeTouchListener(this@BookActivity) {
-            override fun onSwipeLeft() {
-                super.onSwipeLeft()
-                nextPage(null)
-            }
-
-            override fun onSwipeRight() {
-                super.onSwipeRight()
-                prevPage(null)
-            }
-
-            override fun onSwipeUp() {
-                super.onSwipeUp()
-                showControls(null)
-            }
-
-            override fun onSwipeDown() {
-                super.onSwipeDown()
-                showControls(null)
-            }
-        })
 
         // Load book
         val ebookPath = intent.getStringExtra("ebookPath")
@@ -98,6 +75,37 @@ class BookActivity : AppCompatActivity() {
 
         })
 
+        val len: Int = resources.displayMetrics.densityDpi / 6
+        val controlButtonTouchListener = object : View.OnTouchListener {
+            var initX = 0f
+            var initY = 0f
+            @SuppressLint("ClickableViewAccessibility")
+            override fun onTouch(v: View, event: MotionEvent): Boolean {
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        initX = event.x
+                        initY = event.y
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        initX -= event.x //now has difference value
+                        initY -= event.y //now has difference value
+                        if (initX > len) {
+                            nextPage(null)
+                        } else if (initX < -len) {
+                            prevPage(null)
+                        } else {
+                            if (initY < 0) initY = -initY
+                            if (initX < 0) initX = -initX
+                            if (initX <= len / 4 && initY <= len / 4) {
+                                showControls(null)
+                            }
+                        }
+                    }
+                }
+                return true
+            }
+        }
+        contentPanel.setOnTouchListener(controlButtonTouchListener)
     }
 
     @SuppressLint("SetTextI18n")
