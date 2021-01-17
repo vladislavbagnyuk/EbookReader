@@ -26,12 +26,13 @@ class BookActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
+        // Hide UI on book open
         bottomAppBar.post {
             bottomAppBar.performHide()
         }
 
+        // Swipe listener
         contentLayout.setOnTouchListener(object : OnSwipeTouchListener(this@BookActivity) {
-
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
                 nextPage(null)
@@ -53,6 +54,7 @@ class BookActivity : AppCompatActivity() {
             }
         })
 
+        // Load book
         val ebookPath = intent.getStringExtra("ebookPath")
         val ebookTitle = intent.getStringExtra("ebookTitle")
         if (ebookTitle != null) {
@@ -69,11 +71,13 @@ class BookActivity : AppCompatActivity() {
 
         // Set a SeekBar change listener
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
             @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 // Display the current progress of SeekBar
                 currentPage = ((i.toDouble() / 100 * pageCount).toInt())
+                if (currentPage > pageCount) {
+                    currentPage = pageCount
+                }
                 setLabels(i)
             }
 
@@ -102,8 +106,10 @@ class BookActivity : AppCompatActivity() {
 
     private fun setLabels(percentage: Int) {
         seekBar.progress = percentage
+        val displayPage = currentPage + 1
+        val dispalyPageCount = pageCount + 1
         "$percentage%".also { percentageLabel.text = it }
-        "$currentPage/$pageCount".also { pagesCountLabel.text = it }
+        "$displayPage/$dispalyPageCount".also { pagesCountLabel.text = it }
     }
 
     fun showControls(view: View?) {
