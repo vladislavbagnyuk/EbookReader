@@ -1,7 +1,6 @@
 package com.vladislavbagnyuk.ebookreader
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.View
@@ -11,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.github.mertakdut.BookSection
 import com.github.mertakdut.Reader
-import com.github.mertakdut.exception.OutOfPagesException
-import com.github.mertakdut.exception.ReadingException
 import com.vladislavbagnyuk.ebookreader.database.BookViewModel
 import kotlinx.android.synthetic.main.activity_book.*
 
@@ -121,12 +118,8 @@ class BookActivity : AppCompatActivity() {
             Toast.makeText(this, R.string.unable_to_save_progress_to_database, Toast.LENGTH_SHORT).show()
         }
 
-        // todo - ziskani coveru (chyba knihovny)
         // todo - zrychleni recyclerview (komprese obrazku coveru)
-        // todo - recents (5 s nejvyssim timestampem) (+ poresit XML resource viz minuly commit)
         // todo - loading spinner pri pridavani knihy
-        // todo vymazat pocitani lastpage v bookactivity
-        // todo vymazat Book.kt
     }
 
     private fun setLabels(percentage: Int) {

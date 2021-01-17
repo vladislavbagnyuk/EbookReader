@@ -12,11 +12,14 @@ interface BookDao {
     @Query("SELECT * FROM books")
     fun getAllBooks(): LiveData<List<Book>>
 
+    @Query("SELECT * FROM books ORDER BY timestamp DESC LIMIT 5")
+    fun getRecentsBooks(): LiveData<List<Book>>
+
     @Update
     fun updateBook(book: Book)
 
-    @Query("UPDATE books SET lastPage = :currentPage WHERE id = :id")
-    fun updateCurrentPageById(id: Int, currentPage: Int)
+    @Query("UPDATE books SET lastPage = :currentPage, timestamp = :timestamp WHERE id = :id")
+    fun updateCurrentPageById(id: Int, currentPage: Int, timestamp: Int = System.currentTimeMillis().toInt())
 /*
     @Query("SELECT * FROM books WHERE id=:bookId")
     fun getBookById(bookId: Int): Book
