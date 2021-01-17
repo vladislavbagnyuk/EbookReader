@@ -13,8 +13,9 @@ data class Book(
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     val cover: ByteArray,
     val pages: Int,
-    val lastPage: Int,
-    val ebookPath: String
+    val ebookPath: String,
+    val lastPage: Int = 0,
+    val timestamp: Int = System.currentTimeMillis().toInt()
 ) {
     fun percentage(): Int {
         return ((lastPage.toDouble() / pages) * 100).toInt()

@@ -9,4 +9,12 @@ class BookRepository(private val bookDao: BookDao) {
     fun addBook(book: Book) {
         bookDao.addBook(book)
     }
+
+    fun updateBook(book: Book) {
+        bookDao.updateBook(book)
+    }
+
+    fun updateCurrentPageById(id: Int, currentPage: Int) {
+        bookDao.updateCurrentPageById(id, currentPage)
+    }
 }
