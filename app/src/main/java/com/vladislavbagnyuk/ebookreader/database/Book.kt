@@ -1,5 +1,6 @@
 package com.vladislavbagnyuk.ebookreader.database
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,7 +10,8 @@ data class Book(
     val id: Int,
     val title: String,
     val author: String,
-    val cover: Int,
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    val cover: ByteArray,
     val pages: Int,
     val lastPage: Int,
     val ebookPath: String

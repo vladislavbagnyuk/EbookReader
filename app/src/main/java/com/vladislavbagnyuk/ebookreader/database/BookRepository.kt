@@ -6,7 +6,7 @@ class BookRepository(private val bookDao: BookDao) {
 
     val getAllBooks: LiveData<List<Book>> = bookDao.getAllBooks()
 
-    /*suspend */fun addBook(book: Book) {
+    fun addBook(book: Book) {
         bookDao.addBook(book)
     }
 }

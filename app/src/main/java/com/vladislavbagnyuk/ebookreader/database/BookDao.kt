@@ -7,7 +7,7 @@ import androidx.room.*
 interface BookDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    /*suspend */fun addBook(book: Book)
+    fun addBook(book: Book)
 
     @Query("SELECT * FROM books")
     fun getAllBooks(): LiveData<List<Book>>

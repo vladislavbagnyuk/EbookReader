@@ -1,12 +1,15 @@
 package com.vladislavbagnyuk.ebookreader
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.vladislavbagnyuk.ebookreader.database.Book
 import kotlinx.android.synthetic.main.book_card_library.view.*
+
 
 class LibraryAdapter(private val books: List<Book>) :
     RecyclerView.Adapter<LibraryAdapter.BookViewHolder>() {
@@ -26,8 +29,15 @@ class LibraryAdapter(private val books: List<Book>) :
     override fun onBindViewHolder(holder: BookViewHolder, index: Int) {
         val book = books[index]
 
+        holder.itemView.setOnClickListener { v ->
+            val intent = Intent(v.context, BookActivity::class.java)
+            intent.putExtra("ebookPath", book.ebookPath)
+            v.context.startActivity(intent)
+        }
+
         with(holder.card) {
-            iv_cover.setImageResource(book.cover)
+            val bmp = BitmapFactory.decodeByteArray(book.cover, 0, book.cover.size)
+            iv_cover.setImageBitmap(bmp)
             tv_percentage.text = "${book.percentage()}%"
         }
 
