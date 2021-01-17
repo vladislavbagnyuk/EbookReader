@@ -33,6 +33,7 @@ class LibraryAdapter(private val books: List<Book>) :
             val intent = Intent(v.context, BookActivity::class.java)
             intent.putExtra("ebookPath", book.ebookPath)
             intent.putExtra("ebookTitle", book.title)
+            intent.putExtra("ebookId", book.id)
             v.context.startActivity(intent)
         }
 

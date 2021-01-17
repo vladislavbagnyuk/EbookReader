@@ -113,7 +113,6 @@ class MainActivity : AppCompatActivity() {
                 author,
                 coverImage,
                 pageCount,
-                0,
                 ebookPath
             )
             mBookViewModel.addBook(book)

@@ -24,4 +24,5 @@
     <string name="next_page">Next page</string>
     <string name="successfully_saved">Book was successfully saved</string>
     <string name="book_title">Book title</string>
+    <string name="unable_to_save_progress_to_database">Unable to save progress to database</string>
 </resources>

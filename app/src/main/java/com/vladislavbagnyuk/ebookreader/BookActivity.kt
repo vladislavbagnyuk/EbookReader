@@ -8,10 +8,12 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.github.mertakdut.BookSection
 import com.github.mertakdut.Reader
 import com.github.mertakdut.exception.OutOfPagesException
 import com.github.mertakdut.exception.ReadingException
+import com.vladislavbagnyuk.ebookreader.database.BookViewModel
 import kotlinx.android.synthetic.main.activity_book.*
 
 
@@ -20,8 +22,9 @@ class BookActivity : AppCompatActivity() {
 
     var pageCount = 0
     private var currentPage = 1
-
+    private var ebookId = 0;
     private val reader = Reader()
+    private lateinit var mBookViewModel: BookViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,9 @@ class BookActivity : AppCompatActivity() {
         bottomAppBar.post {
             bottomAppBar.performHide()
         }
+
+        // room Db
+        mBookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
 
         contentLayout.setOnTouchListener(object : OnSwipeTouchListener(this@BookActivity) {
 
@@ -57,6 +63,8 @@ class BookActivity : AppCompatActivity() {
 
         val ebookPath = intent.getStringExtra("ebookPath")
         val ebookTitle = intent.getStringExtra("ebookTitle")
+        ebookId = intent.getIntExtra("ebookId", 0)
+
         if (ebookTitle != null) {
             toolbar_title.text = ebookTitle
         }
@@ -100,6 +108,20 @@ class BookActivity : AppCompatActivity() {
 
         // set html to webview
         contentPanel.text = sectionTextContent
+
+        if (ebookId > 0) {
+            // update current page in db
+            mBookViewModel.updateCurrentPageById(ebookId, currentPage)
+        } else {
+            Toast.makeText(this, R.string.unable_to_save_progress_to_database, Toast.LENGTH_SHORT).show()
+        }
+
+        // todo - ziskani coveru (chyba knihovny)
+        // todo - zrychleni recyclerview (komprese obrazku coveru)
+        // todo - recents (5 s nejvyssim timestampem) (+ poresit XML resource viz minuly commit)
+        // todo - loading spinner pri pridavani knihy
+        // todo vymazat pocitani lastpage v bookactivity
+        // todo vymazat Book.kt
     }
 
     private fun setLabels(percentage: Int) {

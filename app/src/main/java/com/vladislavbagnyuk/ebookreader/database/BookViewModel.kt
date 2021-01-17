@@ -23,4 +23,16 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
             repository.addBook(book)
         }
     }
+
+    fun updateBook(book: Book) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateBook(book)
+        }
+    }
+
+    fun updateCurrentPageById(id: Int, currentPage: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateCurrentPageById(id, currentPage)
+        }
+    }
 }
