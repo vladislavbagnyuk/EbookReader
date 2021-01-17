@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class BookViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val getAllBooks: LiveData<List<Book>>
+    val getAllBooks: LiveData<List<Book>>
     private val repository: BookRepository
 
     init {
