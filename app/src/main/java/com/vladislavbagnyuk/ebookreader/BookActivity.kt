@@ -66,6 +66,8 @@ class BookActivity : AppCompatActivity() {
         val ebookPath = intent.getStringExtra("ebookPath")
         val ebookTitle = intent.getStringExtra("ebookTitle")
         ebookId = intent.getIntExtra("ebookId", 0)
+        currentPage = intent.getIntExtra("lastPage", 0)
+        pageCount = intent.getIntExtra("pages", 0)
 
         if (ebookTitle != null) {
             toolbar_title.text = ebookTitle
@@ -75,7 +77,6 @@ class BookActivity : AppCompatActivity() {
             reader.setMaxContentPerSection(800) // Max string length for the current page.
             reader.setIsIncludingTextContent(true) // Optional, to return the tags-excluded version.
             reader.setFullContent(ebookPath) // Must call before readSection.
-            pageCount = loadPageCount(this)
             renderPage()
         }
 
@@ -158,38 +159,6 @@ class BookActivity : AppCompatActivity() {
     fun prevPage(view: View?) {
         currentPage -= 1
         renderPage()
-    }
-
-    // Get total page count
-    private fun loadPageCount(context: Context): Int {
-        println("loadPageCount")
-        val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
-        if (!sharedPreferences.contains("PAGE_NUM")) savePageCount(
-            context,
-            designatePageCount(context)
-        )
-        return sharedPreferences.getInt("PAGE_NUM", Int.MAX_VALUE)
-    }
-
-    private fun designatePageCount(context: Context): Int {
-        println("designatePageCount")
-        try {
-            reader.readSection(Int.MAX_VALUE)
-        } catch (e: ReadingException) {
-            e.printStackTrace()
-        } catch (e: OutOfPagesException) {
-            e.printStackTrace()
-            return e.pageCount
-        }
-        return Int.MAX_VALUE
-    }
-
-    private fun savePageCount(context: Context, num: Int) {
-        println("savePageCount")
-        val sharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
-        sharedPreferences.edit().putInt("PAGE_NUM", num).apply()
     }
 }
 

@@ -34,6 +34,8 @@ class LibraryAdapter(private val books: List<Book>) :
             intent.putExtra("ebookPath", book.ebookPath)
             intent.putExtra("ebookTitle", book.title)
             intent.putExtra("ebookId", book.id)
+            intent.putExtra("lastPage", book.lastPage)
+            intent.putExtra("pages", book.pages)
             v.context.startActivity(intent)
         }
 
