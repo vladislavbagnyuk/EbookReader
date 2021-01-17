@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
@@ -19,8 +18,8 @@ import kotlinx.android.synthetic.main.activity_book.*
 class BookActivity : AppCompatActivity() {
     @SuppressLint("RestrictedApi")
 
-    var pageCount = 0;
-    private var currentPage = 1;
+    var pageCount = 0
+    private var currentPage = 1
 
     private val reader = Reader()
 
@@ -31,17 +30,30 @@ class BookActivity : AppCompatActivity() {
             bottomAppBar.performHide()
         }
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter.createFromResource(
-//            this,
-//            R.array.planets_array,
-//            android.R.layout.simple_spinner_item
-//        ).also { adapter ->
-//            // Specify the layout to use when the list of choices appears
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//            // Apply the adapter to the spinner
-//            //font_spinner.adapter = adapter
-//        }
+        contentLayout.setOnTouchListener(object : OnSwipeTouchListener(this@BookActivity) {
+
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+                nextPage(null)
+            }
+
+            override fun onSwipeRight() {
+                super.onSwipeRight()
+                prevPage(null)
+            }
+
+            override fun onSwipeUp() {
+                super.onSwipeUp()
+                Toast.makeText(this@BookActivity, "Swipe up gesture detected", Toast.LENGTH_SHORT)
+                    .show()
+                showControls(null)
+            }
+
+            override fun onSwipeDown() {
+                super.onSwipeDown()
+                showControls(null)
+            }
+        })
 
         val ebookPath = intent.getStringExtra("ebookPath")
         if (ebookPath !== null) {
@@ -58,7 +70,7 @@ class BookActivity : AppCompatActivity() {
             @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 // Display the current progress of SeekBar
-                currentPage = ((i.toDouble()/100*pageCount).toInt())
+                currentPage = ((i.toDouble() / 100 * pageCount).toInt())
                 setLabels(i)
             }
 
@@ -84,12 +96,14 @@ class BookActivity : AppCompatActivity() {
         // set html to webview
         contentPanel.text = sectionTextContent
     }
-    private fun setLabels(percentage: Int){
+
+    private fun setLabels(percentage: Int) {
         seekBar.progress = percentage
         "$percentage%".also { percentageLabel.text = it }
         "$currentPage/$pageCount".also { pagesCountLabel.text = it }
     }
-    fun showControls(view: View) {
+
+    fun showControls(view: View?) {
         if (toolbar.visibility == View.GONE) {
             bottomAppBar.performShow()
             toolbar.visibility = View.VISIBLE
@@ -103,12 +117,12 @@ class BookActivity : AppCompatActivity() {
         finish()
     }
 
-    fun nextPage(view: View) {
+    fun nextPage(view: View?) {
         currentPage += 1
         renderPage()
     }
 
-    fun prevPage(view: View) {
+    fun prevPage(view: View?) {
         currentPage -= 1
         renderPage()
     }
