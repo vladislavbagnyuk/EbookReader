@@ -39,24 +39,18 @@ class MainActivity : AppCompatActivity() {
 
         rv_recent.setHasFixedSize(true)
         rv_recent.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_recent.adapter = RecentAdapter(getRecentBooks())
 
         rv_library.setHasFixedSize(true)
         rv_library.layoutManager = GridLayoutManager(this, 2)
 
         // room database
         mBookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
+        mBookViewModel.getRecentsBooks.observe(this, Observer { book ->
+            rv_recent.adapter = RecentAdapter(book)
+        })
         mBookViewModel.getAllBooks.observe(this, Observer { book ->
             rv_library.adapter = LibraryAdapter(book)
         })
-    }
-
-    fun openBook(view: View) {
-        // todo del this method ?
-/*
-        val intent = Intent(this, BookActivity::class.java)
-        intent.putExtra("ebookPath", ebookPath)
-        startActivity(intent)*/
     }
 
     fun addBook(view: View) {
@@ -92,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             val title = reader.infoPackage.metadata.title
             var coverImage = reader.coverImage
 
-            // todo check if author or title vals are not null...
+            // todo check if author is not null
 
             if (coverImage == null) {
                 // save default cover image
@@ -133,105 +127,4 @@ class MainActivity : AppCompatActivity() {
         }
         return Int.MAX_VALUE
     }
-}
-
-
-fun getSampleBooks(): List<Book> {
-    return listOf(
-        Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
-        Book(
-            "The Lord of the Rings: The Fellowship of the Ring",
-            "J. R. R. Tolkien",
-            R.drawable.coverlotr,
-            1200,
-            200,
-            "Lorem ipsum dolor sit amet"
-        ),
-        Book(
-            "Harry Potter and the Half-Blood Prince",
-            "J. K. Rowling",
-            R.drawable.cover_harry_potter,
-            500,
-            320,
-            "Lorem ipsum dolor sit amet"
-        ),
-        Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
-        Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
-        Book(
-            "The Lord of the Rings: The Fellowship of the Ring",
-            "J. R. R. Tolkien",
-            R.drawable.coverlotr,
-            1200,
-            200,
-            "Lorem ipsum dolor sit amet"
-        ),
-        Book(
-            "Harry Potter and the Half-Blood Prince",
-            "J. K. Rowling",
-            R.drawable.cover_harry_potter,
-            500,
-            320,
-            "Lorem ipsum dolor sit amet"
-        ),
-        Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
-        Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
-        Book(
-            "The Lord of the Rings: The Fellowship of the Ring",
-            "J. R. R. Tolkien",
-            R.drawable.coverlotr,
-            1200,
-            200,
-            "Lorem ipsum dolor sit amet"
-        ),
-        Book(
-            "Harry Potter and the Half-Blood Prince",
-            "J. K. Rowling",
-            R.drawable.cover_harry_potter,
-            500,
-            320,
-            "Lorem ipsum dolor sit amet"
-        ),
-        Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
-        Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
-        Book(
-            "The Lord of the Rings: The Fellowship of the Ring",
-            "J. R. R. Tolkien",
-            R.drawable.coverlotr,
-            1200,
-            200,
-            "Lorem ipsum dolor sit amet"
-        ),
-        Book(
-            "Harry Potter and the Half-Blood Prince",
-            "J. K. Rowling",
-            R.drawable.cover_harry_potter,
-            500,
-            320,
-            "Lorem ipsum dolor sit amet"
-        ),
-        Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
-    )
-}
-
-fun getRecentBooks(): List<Book> {
-    return listOf(
-        Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
-        Book(
-            "The Lord of the Rings: The Fellowship of the Ring",
-            "J. R. R. Tolkien",
-            R.drawable.coverlotr,
-            1200,
-            200,
-            "Lorem ipsum dolor sit amet"
-        ),
-        Book(
-            "Harry Potter and the Half-Blood Prince",
-            "J. K. Rowling",
-            R.drawable.cover_harry_potter,
-            500,
-            320,
-            "Lorem ipsum dolor sit amet"
-        ),
-        Book("1984", "George Orwell", R.drawable.cover1984, 860, 320, "Lorem ipsum dolor sit amet"),
-    )
 }

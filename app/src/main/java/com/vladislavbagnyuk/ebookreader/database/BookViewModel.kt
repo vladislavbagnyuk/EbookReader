@@ -9,13 +9,15 @@ import kotlinx.coroutines.launch
 
 class BookViewModel(application: Application) : AndroidViewModel(application) {
 
-    val getAllBooks: LiveData<List<Book>>
-    private val repository: BookRepository
+    val getAllBooks : LiveData<List<Book>>
+    val getRecentsBooks : LiveData<List<Book>>
+    private val repository : BookRepository
 
     init {
         val bookDao = BookDatabase.getDatabase(application).bookDao()
         repository = BookRepository(bookDao)
         getAllBooks = repository.getAllBooks
+        getRecentsBooks = repository.getRecentsBooks
     }
 
     fun addBook(book: Book) {
