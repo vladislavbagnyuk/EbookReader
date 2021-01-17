@@ -19,7 +19,7 @@ class BookActivity : AppCompatActivity() {
     @SuppressLint("RestrictedApi")
 
     var pageCount = 0
-    private var currentPage = 1
+    private var currentPage = 0
 
     private val reader = Reader()
 
@@ -44,8 +44,6 @@ class BookActivity : AppCompatActivity() {
 
             override fun onSwipeUp() {
                 super.onSwipeUp()
-                Toast.makeText(this@BookActivity, "Swipe up gesture detected", Toast.LENGTH_SHORT)
-                    .show()
                 showControls(null)
             }
 
