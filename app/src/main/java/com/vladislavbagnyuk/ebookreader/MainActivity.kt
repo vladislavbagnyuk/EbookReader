@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
             val ebookPath = getFileFromUri(contentResolver, data.data!!, cacheDir).path
 
-            reader.setMaxContentPerSection(800) // Max string length for the current page.
+            reader.setMaxContentPerSection(610) // Max string length for the current page.
             reader.setIsIncludingTextContent(true) // Optional, to return the tags-excluded version.
             reader.setFullContent(ebookPath) // Must call before readSection.
             val pageCount = designatePageCount(this)

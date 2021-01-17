@@ -74,7 +74,7 @@ class BookActivity : AppCompatActivity() {
         }
 
         if (ebookPath !== null) {
-            reader.setMaxContentPerSection(800) // Max string length for the current page.
+            reader.setMaxContentPerSection(610) // Max string length for the current page.
             reader.setIsIncludingTextContent(true) // Optional, to return the tags-excluded version.
             reader.setFullContent(ebookPath) // Must call before readSection.
             renderPage()
@@ -86,8 +86,8 @@ class BookActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 // Display the current progress of SeekBar
                 currentPage = ((i.toDouble() / 100 * pageCount).toInt())
-                if (currentPage > pageCount) {
-                    currentPage = pageCount
+                if (currentPage >= pageCount) {
+                    currentPage = pageCount - 1
                 }
                 setLabels(i)
             }
@@ -118,7 +118,8 @@ class BookActivity : AppCompatActivity() {
             // update current page in db
             mBookViewModel.updateCurrentPageById(ebookId, currentPage)
         } else {
-            Toast.makeText(this, R.string.unable_to_save_progress_to_database, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.unable_to_save_progress_to_database, Toast.LENGTH_SHORT)
+                .show()
         }
 
         // todo - ziskani coveru (chyba knihovny)
@@ -132,9 +133,8 @@ class BookActivity : AppCompatActivity() {
     private fun setLabels(percentage: Int) {
         seekBar.progress = percentage
         val displayPage = currentPage + 1
-        val dispalyPageCount = pageCount + 1
         "$percentage%".also { percentageLabel.text = it }
-        "$displayPage/$dispalyPageCount".also { pagesCountLabel.text = it }
+        "$displayPage/$pageCount".also { pagesCountLabel.text = it }
     }
 
     fun showControls(view: View?) {
@@ -152,13 +152,17 @@ class BookActivity : AppCompatActivity() {
     }
 
     fun nextPage(view: View?) {
-        currentPage += 1
-        renderPage()
+        if (currentPage < pageCount - 1) {
+            currentPage += 1
+            renderPage()
+        }
     }
 
     fun prevPage(view: View?) {
-        currentPage -= 1
-        renderPage()
+        if (currentPage > 0) {
+            currentPage -= 1
+            renderPage()
+        }
     }
 }
 
