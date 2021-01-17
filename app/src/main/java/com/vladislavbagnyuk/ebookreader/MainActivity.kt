@@ -7,9 +7,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vladislavbagnyuk.ebookreader.database.BookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
@@ -18,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.simpleName
     private val CHOOSE_EBOOK_REQUEST = 1
+    private lateinit var mBookViewModel: BookViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +35,11 @@ class MainActivity : AppCompatActivity() {
         rv_library.setHasFixedSize(true)
         rv_library.layoutManager = GridLayoutManager(this, 2)
         rv_library.adapter = LibraryAdapter(getSampleBooks())
+
+        // room database
+        mBookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
+
+
     }
 
     fun openBook(view: View) {
@@ -63,9 +72,24 @@ class MainActivity : AppCompatActivity() {
 
             val ebookPath = getFileFromUri(contentResolver, data.data!!, cacheDir).path
 
+            // save ebookpath to db
+            val book = com.vladislavbagnyuk.ebookreader.database.Book(
+                0,
+                "title",
+                "author",
+                1,
+                10,
+                1,
+                ebookPath
+            )
+            mBookViewModel.addBook(book)
+
+            Toast.makeText(applicationContext, "Added to db", Toast.LENGTH_SHORT).show()
+            /* todo del this (open book to read)
             val intent = Intent(this, BookActivity::class.java)
             intent.putExtra("ebookPath", ebookPath)
             startActivity(intent)
+            */
         }
     }
 }

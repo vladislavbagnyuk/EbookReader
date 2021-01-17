@@ -46,4 +46,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.mertakdut:EpubParser:1.0.95'
+    // Room components
+    apply plugin: 'kotlin-kapt'
+    def room_version = "2.2.6" // check latest version from docs
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 }
