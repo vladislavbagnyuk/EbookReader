@@ -32,6 +32,7 @@ class LibraryAdapter(private val books: List<Book>) :
         holder.itemView.setOnClickListener { v ->
             val intent = Intent(v.context, BookActivity::class.java)
             intent.putExtra("ebookPath", book.ebookPath)
+            intent.putExtra("ebookTitle", book.title)
             v.context.startActivity(intent)
         }
 

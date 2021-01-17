@@ -56,6 +56,11 @@ class BookActivity : AppCompatActivity() {
         })
 
         val ebookPath = intent.getStringExtra("ebookPath")
+        val ebookTitle = intent.getStringExtra("ebookTitle")
+        if (ebookTitle != null) {
+            toolbar_title.text = ebookTitle
+        }
+
         if (ebookPath !== null) {
             reader.setMaxContentPerSection(800) // Max string length for the current page.
             reader.setIsIncludingTextContent(true) // Optional, to return the tags-excluded version.

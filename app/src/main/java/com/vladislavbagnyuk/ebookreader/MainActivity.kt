@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
                     BitmapFactory.decodeResource(resources, R.drawable.cover_not_available)
 
                 val stream = ByteArrayOutputStream()
-                largeIcon.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                largeIcon.compress(Bitmap.CompressFormat.JPEG, 10, stream)
                 val bitmapdata = stream.toByteArray()
 
                 coverImage = bitmapdata
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                 author,
                 coverImage,
                 pageCount,
-                1,
+                0,
                 ebookPath
             )
             mBookViewModel.addBook(book)
