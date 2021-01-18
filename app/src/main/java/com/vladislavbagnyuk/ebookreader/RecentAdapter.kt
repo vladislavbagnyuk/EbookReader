@@ -41,8 +41,13 @@ class RecentAdapter(private val books: List<Book>) :
         }
 
         with(holder.card) {
-            val bmp = BitmapFactory.decodeByteArray(book.cover, 0, book.cover.size)
-            iv_cover.setImageBitmap(bmp)
+            if (book.cover != null) {
+                val bmp = BitmapFactory.decodeByteArray(book.cover, 0, book.cover.size)
+                iv_cover.setImageBitmap(bmp)
+            } else {
+                iv_cover.setImageResource(R.drawable.cover_not_available)
+            }
+
             tv_percentage.text = "${percentage}%"
             progress_bar.progress = percentage
         }
