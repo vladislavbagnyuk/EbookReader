@@ -20,7 +20,7 @@ class BookActivity : AppCompatActivity() {
     var pageCount = 0
 
     private var currentPage = 1
-    private var ebookId = 0;
+    private var ebookId = 0
 
     private val reader = Reader()
     private lateinit var mBookViewModel: BookViewModel
@@ -105,7 +105,7 @@ class BookActivity : AppCompatActivity() {
                 return true
             }
         }
-        contentPanel.setOnTouchListener(controlButtonTouchListener)
+        contentLayout.setOnTouchListener(controlButtonTouchListener)
     }
 
     @SuppressLint("SetTextI18n")

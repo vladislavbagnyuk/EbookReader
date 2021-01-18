@@ -80,6 +80,7 @@
         android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onClick="showControls"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
         android:paddingTop="25dp">
