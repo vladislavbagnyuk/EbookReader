@@ -37,4 +37,10 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
             repository.updateCurrentPageById(id, currentPage)
         }
     }
+
+    fun deleteBook(book: Book) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteBook(book)
+        }
+    }
 }

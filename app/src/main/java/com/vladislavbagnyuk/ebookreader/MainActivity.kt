@@ -6,7 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.view.ContextMenu
+import android.view.ContextMenu.ContextMenuInfo
+import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView.AdapterContextMenuInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -41,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         rv_library.setHasFixedSize(true)
         rv_library.layoutManager = GridLayoutManager(this, 2)
+        registerForContextMenu(rv_library)
 
         // room database
         mBookViewModel = ViewModelProvider(this).get(BookViewModel::class.java)
@@ -52,7 +58,44 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun addBook(view: View) {
+    /**
+     * MENU
+     */
+    override fun onCreateContextMenu(menu: ContextMenu?, v: View, menuInfo: ContextMenuInfo?) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+
+        if (v.id == R.id.rv_library) {
+            val inflater = menuInflater
+            inflater.inflate(R.menu.library_menu_list, menu)
+        }
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        if (item.menuInfo != null) {
+            val info = item.menuInfo as AdapterContextMenuInfo
+            var test = rv_library.adapter?.getItemId(info.position)
+            Log.d("sdadasd - info", info.toString())
+            Log.d("sdadasd - test", info.toString())
+        } else {
+            Log.d("sdadasd - null", "je to null")
+        }
+
+
+
+
+
+
+        return if (item.itemId == R.id.delete) {
+
+//            mBookViewModel.deleteBook()
+
+            true
+        } else {
+            super.onContextItemSelected(item)
+        }
+    }
+
+    fun addBook() {
         val intent = Intent()
         intent.type = "application/epub+zip"
         intent.action = Intent.ACTION_GET_CONTENT

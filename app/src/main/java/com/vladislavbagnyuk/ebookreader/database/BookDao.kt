@@ -20,11 +20,7 @@ interface BookDao {
 
     @Query("UPDATE books SET lastPage = :currentPage, timestamp = :timestamp WHERE id = :id")
     fun updateCurrentPageById(id: Int, currentPage: Int, timestamp: Int = System.currentTimeMillis().toInt())
-/*
-    @Query("SELECT * FROM books WHERE id=:bookId")
-    fun getBookById(bookId: Int): Book
 
     @Delete
-    fun delete(book: Book)
- */
+    fun deleteBook(book: Book)
 }

@@ -19,4 +19,8 @@ class BookRepository(private val bookDao: BookDao) {
     fun updateCurrentPageById(id: Int, currentPage: Int) {
         bookDao.updateCurrentPageById(id, currentPage)
     }
+
+    fun deleteBook(book: Book) {
+        bookDao.deleteBook(book)
+    }
 }

@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vladislavbagnyuk.ebookreader.BookActivity
+import com.vladislavbagnyuk.ebookreader.MainActivity
 import com.vladislavbagnyuk.ebookreader.R
 import com.vladislavbagnyuk.ebookreader.database.Book
 import kotlinx.android.synthetic.main.book_card_library.view.*
+import kotlinx.coroutines.processNextEventInCurrentThread
 
 
 class LibraryAdapter(private val books: List<Book>) :
@@ -39,6 +41,10 @@ class LibraryAdapter(private val books: List<Book>) :
             intent.putExtra("lastPage", book.lastPage)
             intent.putExtra("pages", book.pages)
             v.context.startActivity(intent)
+        }
+
+        holder.itemView.setOnLongClickListener { v ->
+            v.showContextMenu()
         }
 
         with(holder.card) {
