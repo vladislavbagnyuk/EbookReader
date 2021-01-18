@@ -23,6 +23,7 @@ import com.github.mertakdut.exception.OutOfPagesException
 import com.github.mertakdut.exception.ReadingException
 import com.vladislavbagnyuk.ebookreader.adapters.LibraryAdapter
 import com.vladislavbagnyuk.ebookreader.adapters.RecentAdapter
+import com.vladislavbagnyuk.ebookreader.database.Book
 import com.vladislavbagnyuk.ebookreader.database.BookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     private val CHOOSE_EBOOK_REQUEST = 1
     private lateinit var mBookViewModel: BookViewModel
     private val reader = Reader()
+    var selectedBook = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,23 +73,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        if (item.menuInfo != null) {
-            val info = item.menuInfo as AdapterContextMenuInfo
-            var test = rv_library.adapter?.getItemId(info.position)
-            Log.d("sdadasd - info", info.toString())
-            Log.d("sdadasd - test", info.toString())
-        } else {
-            Log.d("sdadasd - null", "je to null")
-        }
-
-
-
-
-
 
         return if (item.itemId == R.id.delete) {
-
-//            mBookViewModel.deleteBook()
+            Log.d("asdsad", "xd")
+            Log.d("asdsad", selectedBook.toString())
+//            mBookViewModel.deleteBook(selectedBook)
 
             true
         } else {

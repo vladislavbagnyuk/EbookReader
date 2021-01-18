@@ -3,6 +3,7 @@ package com.vladislavbagnyuk.ebookreader.adapters
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import com.vladislavbagnyuk.ebookreader.MainActivity
 import com.vladislavbagnyuk.ebookreader.R
 import com.vladislavbagnyuk.ebookreader.database.Book
 import kotlinx.android.synthetic.main.book_card_library.view.*
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.processNextEventInCurrentThread
 
 
@@ -29,6 +32,7 @@ class LibraryAdapter(private val books: List<Book>) :
     }
 
     // Specifies the contents for the shown book card
+    @InternalCoroutinesApi
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BookViewHolder, index: Int) {
         val book = books[index]
@@ -44,6 +48,9 @@ class LibraryAdapter(private val books: List<Book>) :
         }
 
         holder.itemView.setOnLongClickListener { v ->
+            processNextEventInCurrentThread()
+            MainActivity().selectedBook = 3
+            Log.d("asdsad", book.author)
             v.showContextMenu()
         }
 
