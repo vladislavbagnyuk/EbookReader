@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun addBook() {
+    fun addBook(view: View) {
         val intent = Intent()
         intent.type = "application/epub+zip"
         intent.action = Intent.ACTION_GET_CONTENT
