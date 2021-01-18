@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -20,7 +18,6 @@ import com.github.mertakdut.exception.OutOfPagesException
 import com.github.mertakdut.exception.ReadingException
 import com.vladislavbagnyuk.ebookreader.database.BookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.ByteArrayOutputStream
 import java.io.File
 import kotlin.concurrent.thread
 
@@ -74,9 +71,14 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == CHOOSE_EBOOK_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-            val toast = Toast.makeText(applicationContext, R.string.successfully_saved, Toast.LENGTH_SHORT)
+            val toast = Toast.makeText(
+                applicationContext,
+                R.string.successfully_saved,
+                Toast.LENGTH_SHORT
+            )
 
-            // todo start loading spinner animation
+            // start loading spinner animation
+            progress_loader.visibility = View.VISIBLE;
 
             thread {
                 val ebookPath = getFileFromUri(contentResolver, data.data!!, cacheDir).path
@@ -102,7 +104,10 @@ class MainActivity : AppCompatActivity() {
                 )
                 mBookViewModel.addBook(book)
 
-                // todo stop loading spinner animation
+                // stop loading spinner animation
+                runOnUiThread {
+                    progress_loader.visibility = View.GONE;
+                }
 
                 toast.show()
             }
