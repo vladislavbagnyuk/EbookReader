@@ -9,7 +9,7 @@ interface BookDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addBook(book: Book)
 
-    @Query("SELECT * FROM books")
+    @Query("SELECT * FROM books ORDER BY id DESC")
     fun getAllBooks(): LiveData<List<Book>>
 
     @Query("SELECT * FROM books ORDER BY timestamp DESC LIMIT 5")
