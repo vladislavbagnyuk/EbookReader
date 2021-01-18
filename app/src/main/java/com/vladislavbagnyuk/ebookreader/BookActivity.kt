@@ -126,9 +126,6 @@ class BookActivity : AppCompatActivity() {
             Toast.makeText(this, R.string.unable_to_save_progress_to_database, Toast.LENGTH_SHORT)
                 .show()
         }
-
-        // todo - zrychleni recyclerview (komprese obrazku coveru)
-        // todo - loading spinner pri pridavani knihy
     }
 
     private fun setLabels(percentage: Int) {

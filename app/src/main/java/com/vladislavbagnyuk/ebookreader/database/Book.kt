@@ -11,7 +11,7 @@ data class Book(
     val title: String,
     val author: String,
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-    val cover: ByteArray,
+    val cover: ByteArray?,
     val pages: Int,
     val ebookPath: String,
     val lastPage: Int = 0,

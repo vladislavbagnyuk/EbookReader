@@ -8,7 +8,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +22,7 @@ import com.vladislavbagnyuk.ebookreader.database.BookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.ByteArrayOutputStream
 import java.io.File
+import kotlin.concurrent.thread
 
 
 class MainActivity : AppCompatActivity() {
@@ -74,44 +74,38 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == CHOOSE_EBOOK_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-            Log.d(TAG, "An ebook was chosen by the user")
+            val toast = Toast.makeText(applicationContext, R.string.successfully_saved, Toast.LENGTH_SHORT)
 
-            val ebookPath = getFileFromUri(contentResolver, data.data!!, cacheDir).path
+            // todo start loading spinner animation
 
-            reader.setMaxContentPerSection(610) // Max string length for the current page.
-            reader.setIsIncludingTextContent(true) // Optional, to return the tags-excluded version.
-            reader.setFullContent(ebookPath) // Must call before readSection.
-            val pageCount = designatePageCount(this)
-            val author = reader.infoPackage.metadata.creator
-            val title = reader.infoPackage.metadata.title
-            var coverImage = reader.coverImage
+            thread {
+                val ebookPath = getFileFromUri(contentResolver, data.data!!, cacheDir).path
 
-            // todo check if author is not null
+                reader.setMaxContentPerSection(610) // Max string length for the current page.
+                reader.setIsIncludingTextContent(true) // Optional, to return the tags-excluded version.
+                reader.setFullContent(ebookPath) // Must call before readSection.
+                val pageCount = designatePageCount(this)
+                val author = reader.infoPackage.metadata.creator
+                val title = reader.infoPackage.metadata.title
+                val coverImage = reader.coverImage
 
-            if (coverImage == null) {
-                // save default cover image
-                val largeIcon: Bitmap =
-                    BitmapFactory.decodeResource(resources, R.drawable.cover_not_available)
+                // todo check if author is not null
 
-                val stream = ByteArrayOutputStream()
-                largeIcon.compress(Bitmap.CompressFormat.JPEG, 10, stream)
-                val bitmapdata = stream.toByteArray()
+                // save ebookpath to db
+                val book = com.vladislavbagnyuk.ebookreader.database.Book(
+                    0,
+                    title,
+                    author,
+                    coverImage,
+                    pageCount,
+                    ebookPath
+                )
+                mBookViewModel.addBook(book)
 
-                coverImage = bitmapdata
+                // todo stop loading spinner animation
+
+                toast.show()
             }
-
-            // save ebookpath to db
-            val book = com.vladislavbagnyuk.ebookreader.database.Book(
-                0,
-                title,
-                author,
-                coverImage,
-                pageCount,
-                ebookPath
-            )
-            mBookViewModel.addBook(book)
-
-            Toast.makeText(applicationContext, R.string.successfully_saved, Toast.LENGTH_SHORT).show()
         }
     }
 
