@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mertakdut.Reader
 import com.github.mertakdut.exception.OutOfPagesException
 import com.github.mertakdut.exception.ReadingException
+import com.vladislavbagnyuk.ebookreader.adapters.LibraryAdapter
+import com.vladislavbagnyuk.ebookreader.adapters.RecentAdapter
 import com.vladislavbagnyuk.ebookreader.database.BookViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
