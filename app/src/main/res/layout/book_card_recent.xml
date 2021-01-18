@@ -27,6 +27,8 @@
                 android:id="@+id/iv_cover"
                 style="@style/BookImageView"
                 android:contentDescription="@string/book_cover"
+                android:minWidth="1920dp"
+                android:minHeight="2921dp"
                 android:src="@drawable/cover1984" />
         </androidx.cardview.widget.CardView>
 
